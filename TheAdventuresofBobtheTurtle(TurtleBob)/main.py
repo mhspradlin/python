@@ -20,6 +20,7 @@ def main():
     print("And so we continue!")
     renderscreen()
 
+
 #This function will be used to display the gameplay screen and will adapt to
 # changes in screen size
 #Testing functionality right now
@@ -38,8 +39,8 @@ def renderscreen():
     titleindent = int((width - len(title))/2)
     #Calculate the width of the bodytext lines
     bodywidth = int(0.8 * width)
-    #Calculate the indent for the "Press a Key" message
-    contindent = int((width - len("Press a Key"))/2)
+    #Calculate the indent for the "Press Enter" message
+    contindent = int((width - len("Press Enter"))/2)
     #Calculate the indent for the choices
     choiceindent = int(0.05 * width)
     #Calculate with width of the choice lines
@@ -89,27 +90,18 @@ def renderscreen():
             print("")
             for i in range(contindent):
                 print(" ", end="")
-            input("Press a key") #Also has a newline
+            input("Press Enter") #Also has a newline
         k += 1
     print("")
 
-    #Render the choices, with one line of space in between them, indicating
-    # the selected option
+    #Render the choices, with one line of space in between them
     #Create a list of the choices, randomized
-    picked = 0
     randchoices = random.sample(choices, len(choices))
     for currentchoice in randchoices:
         place = 0
         while place < len(currentchoice):
-            if randchoices.index(currentchoice) == picked and place == 0:
-                #Print the selection indicator in front of the first line
-                for i in range(choiceindent - 2):
-                    print(" ", end="")
-                print(">", end="")
+            for i in range(choiceindent):
                 print(" ", end="")
-            else:
-                for i in range(choiceindent):
-                    print(" ", end="")
             for i in range(choicewidth):
                 #This first clause checks to see if the next character is a newline and
                 # handles it appropriately
@@ -138,10 +130,8 @@ def renderscreen():
                 print("")
                 for i in range(contindent):
                     print(" ", end="")
-                input("Press a key") #Also has a newline
+                input("Press Enter") #Also has a newline
             k += 1
-    
-
     
 
 #This function will be used to clean up after our program and give a farewell
