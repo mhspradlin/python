@@ -1,0 +1,6 @@
+Well, This is Awkward...
+Oh no, she's walking towards you. Don't look, don't look, don't look... "Hey Marceline! I'm soooo glad Aaron invited you to his party! This gives us girls a chance to catch up - Oh my God, I have so much to tell you!"
+end:"SHANNON! Is that you! Get over here so I can hug you!"
+end:Raise your eyebrows and nod with a small smile. Maybe she won't notice your insincerity.
+end:Oh look! You get a very important totally not fake phone call, and hold up a finger for her to wait with a faux-courtesy smile.
+end:Stare at her menacingly. She deserves it for what she did.

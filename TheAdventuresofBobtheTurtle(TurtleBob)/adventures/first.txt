@@ -1,0 +1,6 @@
+Introduction
+As we begin our adventure, the narrator, in a calm and soothing voice, explains some details about our adventurer.\n\nWhat is your name?
+marceline:Marceline
+first:John Pierre III
+first:Tuccidides
+first:Paptcho

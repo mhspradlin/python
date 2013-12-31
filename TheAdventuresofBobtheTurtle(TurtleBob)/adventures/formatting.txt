@@ -1,0 +1,29 @@
+The first line is the title of the page, which will appear centered on the second line of the screen
+The second line is the body text of the page
+The remaining lines are the choices in the format:
+	filenameoftheadventurethatthattoptionleadsto:Text of the choice
+
+So, a file consisting of:
+
+<BEGIN FILE, THIS LINE WOULD NOT ACTUALLY BE IN THE FILE>
+The Mines of Moria
+You have entered the Mines of Moria and there are two doors.\nWhich do you take?
+dragonslair:The one to the left
+crypts:The one to the right
+<END FILE, NOT ACTUALLY THERE, LIKE BEFORE>
+
+Might render like:
+
+===============================
+      The Mines of Moria
+
+You have entered the Mines of
+Moria and there are two doors.
+Which do you take?
+
+1. The one to the right
+
+2. The one to the left
+
+
+Keep in mind that the choices are randomized from how they're written in the file, thataway there's no bias. Yay statistics!(?)
