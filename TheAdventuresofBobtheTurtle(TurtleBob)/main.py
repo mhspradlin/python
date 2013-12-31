@@ -28,7 +28,7 @@ def renderscreen():
     #These will end up being passed as arguments to the renderscreen function
     title = "Introduction"
     bodytext = "As we begin our adventure, the narrator, in a calm and soothing voice, explains some details about our adventurer.\n\nWhat is your name?"
-    choices = ["Marceline", "John\nPierre III", "Tuccidides", "Paptcho"]
+    choices = ["Marceline", "John Pierre III", "Tuccidides", "Paptcho"]
 
     #Get the screen attributes
     (width, height) = terminalsize.get_terminal_size()
@@ -96,12 +96,20 @@ def renderscreen():
     #Render the choices, with one line of space in between them, indicating
     # the selected option
     #Create a list of the choices, randomized
+    picked = 0
     randchoices = random.sample(choices, len(choices))
     for currentchoice in randchoices:
         place = 0
         while place < len(currentchoice):
-            for i in range(choiceindent):
+            if randchoices.index(currentchoice) == picked and place == 0:
+                #Print the selection indicator in front of the first line
+                for i in range(choiceindent - 2):
+                    print(" ", end="")
+                print(">", end="")
                 print(" ", end="")
+            else:
+                for i in range(choiceindent):
+                    print(" ", end="")
             for i in range(choicewidth):
                 #This first clause checks to see if the next character is a newline and
                 # handles it appropriately
@@ -132,7 +140,6 @@ def renderscreen():
                     print(" ", end="")
                 input("Press a key") #Also has a newline
             k += 1
-        print("")
     
 
     
