@@ -20,20 +20,24 @@ def main():
     print("Let the adventure begin!")
     getgoing()
     print("And so we continue!")
+    #Give the screen dimensions greater scope than the renderscreen function
+    (widthpass, heightpass) = terminalsize.get_terminal_size()
     #The first screen
-    (numofchoices, choicemap) = renderscreen("first")
+    (numofchoices, choicemap) = renderscreen("first", widthpass, heightpass)
     #The main game loop
     while True == True:
         #getchoice handles exiting the loop, so no external control is needed
         choice = getchoice(numofchoices)
+        #Get the proper screen size
+        (widthpass, heightpass) = terminalsize.get_terminal_size()
         #Will use the choice to render the appropriate screen, ultimately
-        (numofchoices, choicemap) = renderscreen(choicemap[choice])
+        (numofchoices, choicemap) = renderscreen(choicemap[choice], widthpass, heightpass)
 
 
 #This function will be used to display the gameplay screen and will adapt to
 # changes in screen size
 #Testing functionality right now
-def renderscreen(adventure):
+def renderscreen(adventure, width, height):
     #Open the appropriate file in the adventures folder
     adventurefile = open("adventures/" + adventure + ".txt", "r")
     #Figure out the size of the file and return the pointer to the beginning
@@ -50,9 +54,7 @@ def renderscreen(adventure):
     choices = [adventurefile.readline().split(":", 1)]
     while adventurefile.tell() < filesize:
         choices.append(adventurefile.readline().split(":", 1))
-
-    #Get the screen attributes
-    (width, height) = terminalsize.get_terminal_size()
+    
     #Calculate the indent for the bodytext
     bodyindent = int(width * 0.1)
     #Calculate the indent of the title
@@ -90,41 +92,42 @@ def renderscreen(adventure):
             #This first clause checks to see if the next character is a newline and
             # handles it appropriately
             if place + i + 1 < len(bodytext) and bodytext[place + i] == "\\" and bodytext[place + i + 1] == "n":
-                for l in range(i, bodywidth - 1):
-                    print(" ", end="")
-                print(" ")
+                print("")
                 screennum += 1
-                #Skip rendering the newline character
+                #Skip rendering the newline characters
                 place += i + 2
                 isnew = True
                 break #Leaves the smallest enclosing for/while statement
             if place + i > len(bodytext) - 1:
-                print(" ", end="")
-                place += i
                 break
             print(bodytext[place + i], end="")
         if isnew == False and place < len(bodytext):
             place += int(0.8 * width)
-            for i in range(bodyindent - 2):
-                print(" ", end="")
-            print(" ")
+            print("")
             screennum += 1
         #Note: Have already handled if isnew is True, so no additional steps need
         # to be taken
         isnew = False
-        if screennum >= height - 2:
-            print("")
-            screennum+=1
-            for i in range(contindent):
-                print(" ", end="")
-            input("Press Enter") #Also has a newline
-            screennum += 1
+    if screennum >= height - 2:
+        print("")
+        screennum+=1
+        for i in range(contindent):
+            print(" ", end="")
+        input("Press Enter") #Also has a newline
+        screennum += 1
+        height += height
+        renderscreen(adventure, width, height)
     print("")
-    screennum += 1
+    print("")
+    screennum += 2
 
     #Render the choices, with one line of space in between them
     #Create a list of the choices, randomized
     randchoices = random.sample(list(zip(*choices))[1], len(choices))
+    #Get rid of newlines at the end of the choices, if they are there
+    for currentchoice in randchoices:
+        if currentchoice[-1] == "\n":
+            randchoices[randchoices.index(currentchoice)] = currentchoice[:-1]
     for currentchoice in randchoices:
         place = 0
         while place < len(currentchoice):
@@ -138,39 +141,33 @@ def renderscreen(adventure):
             for i in range(choicewidth):
                 #This first clause checks to see if the next character is a newline and
                 # handles it appropriately
-                if place + i <= len(currentchoice) - 1 and currentchoice[place + i] == "\n":
-                    for l in range(i, choicewidth - 1):
-                        print(" ", end="")
-                    print(" ")
+                if place + i + 1 < len(currentchoice) and currentchoice[place + i] == "\\" and currentchoice[place + i + 1] == "n":
+                    print("")
                     screennum += 1
                     #Skip rendering the newline character
-                    place += i + 1
+                    place += i + 2
                     isnew = True
                     break #Leaves the smallest enclosing for/while statement
                 if place + i > len(currentchoice) - 1:
-                    print(" ", end="")
                     break
                 print(currentchoice[place + i], end="")
             if isnew == False:
-                place += int(0.8 * width)
-                for i in range(choiceindent - 1):
-                    print(" ", end="")
-                print(" ")
-                screennum += 1
+                place += int(0.9 * width)
             #Note: Have already handled if isnew is True, so no additional
             # steps need to be taken
             isnew = False
-            for i in range(choiceindent - 1):
-                print(" ", end="")
-            print(" ")
+            print("") #Line of space between options
             screennum += 1
             if screennum >= height - 2:
                 print("")
                 screennum += 1
+                print(str(screennum) + "/" + str(height))
                 for i in range(contindent):
                     print(" ", end="")
                 input("Press Enter") #Also has a newline
                 screennum += 1
+                height += 6
+                renderscreen(adventure, width, height)
     
     #Print blank lines until this rendering has taken up the rest of the window,
     # save a line for the input from the user        
@@ -184,7 +181,7 @@ def renderscreen(adventure):
     choicemap = {}
     for i in range(len(randchoices)):
         for k in range(len(choices)):
-            if choices[k][1] == randchoices[i]:
+            if choices[k][1] == randchoices[i] or choices[k][1] == randchoices[i] + "\n":
                 choicemap[i+1] = choices[k][0]
     return (len(randchoices), choicemap)
                 
