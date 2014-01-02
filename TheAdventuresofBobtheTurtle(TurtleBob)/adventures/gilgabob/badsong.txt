@@ -1,0 +1,3 @@
+Uh oh...
+Gilgabob booms: "How dare you insult me so! Begone!"\n\nGilgabob smites you.
+end:Bummer.

@@ -1,0 +1,3 @@
+Bold Move, let's see how it plays out
+The turtle smirks, and asks, "My name is Gilgabob the Great. I have conquered many creatures, and saved the land countless times from evil. Please, make a song that celebrates my great achievements."
+/gilgabob/badsong:Not thinking he'd call your bluff, you improvise:\n"Uhh... Yay Gilgabob,\nMaster of the land and sea,\nYou're so great,\nYay!"

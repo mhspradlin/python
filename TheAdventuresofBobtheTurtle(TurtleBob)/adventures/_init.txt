@@ -1,0 +1,3 @@
+Choose an Adventure
+Which adventure would you like to choose?
+/gilgabob/start:The Epic of Gilgabob

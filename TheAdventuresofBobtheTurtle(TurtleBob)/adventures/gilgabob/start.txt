@@ -1,0 +1,5 @@
+Introduction
+"Hear me!" boomed the voice of the omni-goat.\n"I hear thee, and smite thee!" shouted the turtle, whom then brought down his hammer to the unfortunate demise of the omni-goat.
+/gilgabob/donttalktome:"What am I doing here?"
+/gilgabob/whogoesthere:"That was amazing, oh turtle! Pray tell, what is your name?"
+/gilgabob/hidden:Drop prone, attempting to remain hidden.

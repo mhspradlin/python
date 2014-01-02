@@ -1,0 +1,4 @@
+The Quiet after the Storm
+The turtle relishes his victory for a moment, then begins walking towards an opening in the wall in the canyon surrounding where you are. Very slowly.
+/gilgabob/respond:Sheepishly say "Oh turtle, your deeds simply beg for a song to be written about them! Would you allow me this honor?"
+/gilgabob/doublehidden:Attempt to keep quiet and to the wall.

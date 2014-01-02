@@ -1,0 +1,3 @@
+Untimely Demise
+"How darest a full-mortal speak to me in such a disrespectful manner!"\nGilgabob then smites you.
+end:Bummer.

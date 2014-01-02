@@ -23,7 +23,7 @@ def main():
     #Give the screen dimensions greater scope than the renderscreen function
     (widthpass, heightpass) = terminalsize.get_terminal_size()
     #The first screen
-    (numofchoices, choicemap) = renderscreen("first", widthpass, heightpass)
+    (numofchoices, choicemap) = renderscreen("_init", widthpass, heightpass)
     #The main game loop
     while True == True:
         #getchoice handles exiting the loop, so no external control is needed
@@ -38,6 +38,9 @@ def main():
 # changes in screen size
 #Testing functionality right now
 def renderscreen(adventure, width, height):
+    #Exit if we have reached the end
+    if adventure == "end":
+        again()
     #Open the appropriate file in the adventures folder
     adventurefile = open("adventures/" + adventure + ".txt", "r")
     #Figure out the size of the file and return the pointer to the beginning
@@ -108,15 +111,16 @@ def renderscreen(adventure, width, height):
         #Note: Have already handled if isnew is True, so no additional steps need
         # to be taken
         isnew = False
-    if screennum >= height - 2:
-        print("")
-        screennum+=1
-        for i in range(contindent):
-            print(" ", end="")
-        input("Press Enter") #Also has a newline
-        screennum += 1
-        height += height
-        renderscreen(adventure, width, height)
+#Will implement this code later, will probably need to rewrite a bit of the renderscreen code
+#    if screennum >= height - 2:
+#        print("")
+#        screennum+=1
+#        for i in range(contindent):
+#            print(" ", end="")
+#        input("Press Enter") #Also has a newline
+#        screennum += 1
+#        height += height
+#        renderscreen(adventure, width, height)
     print("")
     print("")
     screennum += 2
@@ -158,16 +162,15 @@ def renderscreen(adventure, width, height):
             isnew = False
             print("") #Line of space between options
             screennum += 1
-            if screennum >= height - 2:
-                print("")
-                screennum += 1
-                print(str(screennum) + "/" + str(height))
-                for i in range(contindent):
-                    print(" ", end="")
-                input("Press Enter") #Also has a newline
-                screennum += 1
-                height += 6
-                renderscreen(adventure, width, height)
+#WILL IMPLEMENT THIS CODE LATER, will probably need a little rewrite of the renderscreen code
+#        if screennum >= height - 2:
+#           screennum += 1
+#            for i in range(contindent):
+#                print(" ", end="")
+#            input("Press Enter") #Also has a newline
+#            screennum += 1
+#            renderscreen(adventure, width, height + height)
+#            break
     
     #Print blank lines until this rendering has taken up the rest of the window,
     # save a line for the input from the user        
@@ -184,6 +187,8 @@ def renderscreen(adventure, width, height):
             if choices[k][1] == randchoices[i] or choices[k][1] == randchoices[i] + "\n":
                 choicemap[i+1] = choices[k][0]
     return (len(randchoices), choicemap)
+    #Close the file that we opened
+    adventurefile.close()
                 
 #This function gets the choice from the user and renders the next screen as
 # well as allowing a civil exit from the program
@@ -203,6 +208,19 @@ def goodbye():
     time.sleep(1)
     print("Fair travels!")
     time.sleep(1)
+
+#This function asks the player if they would like to play again, and starts
+# the program over if they do
+def again():
+    time.sleep(1)
+    choiceagain = input("Would you like to play again? (y/n) ")
+    if choiceagain == "y":
+        main()
+    elif choiceagain != "n":
+        print("I didn't understand that response!")
+        again()
+    else:
+        exit()
 
 #This allows the user to exit the program in a civil manner
 #Note: If the input is 'y', then we just pass through this function

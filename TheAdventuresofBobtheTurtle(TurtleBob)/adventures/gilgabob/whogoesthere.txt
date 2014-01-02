@@ -1,0 +1,3 @@
+A First Interaction
+Gilgabob turns towards your voice and booming, asks, "Who goes there, mysterious voice? Show thyself before invoking my wrath!"
+/gilgabob/respond:Confidently, respond, "It is I, Harvey, the bard!" This is completely pulled out of your ass. The last thing you remember, you were stealing a salt shaker from another table in the dining hall.
