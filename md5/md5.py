@@ -110,7 +110,7 @@ def hash(bytelist):
 	for i in range(1, 1 + int(len(bytelist) / 64)):
 		
 		#For debugging
-		print("A_0: " + hex(A_0))
+		#print("A_0: " + hex(A_0))
 	
 		#Initialize the ABCD values
 		A = A_0
@@ -124,8 +124,11 @@ def hash(bytelist):
 			        bytelist[4 * j * i + 1] * 256 ** 2 + \
 			        bytelist[4 * j * i + 2] * 256 + \
 					bytelist[4 * j * i + 3]
-			print("Value for " + str(j) + ":" + str(value))
-			print("A: " + hex(A) + "\n" + "B: " + hex(B) + "\n" + "C: " + hex(C) + "\n" + "D: " + hex(D))
+			
+			#For Debugging
+			#print("Value for " + str(j) + ":" + str(value))
+			#print("A: " + hex(A) + "\n" + "B: " + hex(B) + "\n" + "C: " + hex(C) + "\n" + "D: " + hex(D))
+			
 			holdb = B
 			B = (leftrotate((F(B,C,D) + A + value + \
 				complexity[j]) % 2 ** 32, \
@@ -133,7 +136,10 @@ def hash(bytelist):
 			holdd = D
 			D = C
 			C = holdb
-			print("B: " + hex(B))
+			
+			#For Debugging
+			#print("B: " + hex(B))
+			
 			A = holdd
 		#Go through each chunk again, but with a twist
 		for j in range(16, 32):
@@ -142,7 +148,10 @@ def hash(bytelist):
 								  256 ** 2 + \
 			        bytelist[((5 * j * i + 1) % 16) * 4 + 2] * 256 + \
 					bytelist[((5 * j * i + 1) % 16) * 4 + 3]
-			print("Value for " + str(j) + ":" + str(value))
+			
+			#For Debugging
+			#print("Value for " + str(j) + ":" + str(value))
+			
 			holdb = B
 			B = (leftrotate((G(B,C,D) + A + value + \
 						complexity[j]) % 2 ** 32, \
@@ -158,7 +167,10 @@ def hash(bytelist):
 								  256 ** 2 + \
 			        bytelist[((3 * j * i + 5) % 16) * 4 + 2] * 256 + \
 					bytelist[((3 * j * i + 5) % 16) * 4 + 3]
-			print("Value for " + str(j) + ":" + str(value))
+			
+			#For Debugging
+			#print("Value for " + str(j) + ":" + str(value))
+			
 			holdb = B
 			B = (leftrotate((H(B,C,D) + A + value + \
 						complexity[j]) % 2 ** 32, \
@@ -174,8 +186,11 @@ def hash(bytelist):
 								  256 ** 2 + \
 			        bytelist[((7 * j * i) % 16) * 4 + 2] * 256 + \
 					bytelist[((7 * j * i) % 16) * 4 + 3]
-			print("Value for " + str(j) + ":" + str(value))
-			print("Value of B: " + str(B))
+			
+			#For Debugging
+			#print("Value for " + str(j) + ":" + str(value))
+			#print("Value of B: " + str(B))
+			
 			holdb = B
 			B = (leftrotate((I(B,C,D) + A + value + \
 						complexity[j]) % 2 ** 32, \
@@ -186,7 +201,7 @@ def hash(bytelist):
 			A = holdd
 		
 		#For debugging
-		print("A: " + hex(A))
+		#print("A: " + hex(A))
 
 		#Append our hash to the total
 		A_0 = (A_0 + A) % 2 ** 32
@@ -194,7 +209,9 @@ def hash(bytelist):
 		C_0 = (C_0 + C) % 2 ** 32
 		D_0 = (D_0 + D) % 2 ** 32
 
-		print("A_0: " + hex(A_0))
+		#For Debugging
+		#print("A_0: " + hex(A_0))
+	
 	return ((A_0 << 96) + (B_0 << 64) + (C_0 << 32) + D_0)
 
 def main():
@@ -202,9 +219,9 @@ def main():
 	print("File size in bits: " + str(os.path.getsize(filename) * 8))
 	bytelist = loadfile(filename)
 	hashtext = hash(bytelist)
-	print(hex(hashtext))
+	print("The hash in hex: " + hex(hashtext))
 
-#main()
+main()
 
 #For Debugging
 def stepone(A,B,C,D, Value, Complexity, LShift):
